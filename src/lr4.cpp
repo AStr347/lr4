@@ -8,6 +8,7 @@
 #include <iostream>
 #include "arch.h"
 #include <cmath>
+#include <ctime>
 
 /**
  * calculate 1 value of Wonderful series
@@ -33,6 +34,7 @@ void any_thread(const int rank){
 */
 static
 void zero_thread(const int size){
+    const std::clock_t c_start = std::clock();
     f32 result = 1;
     for(int i = 1; i < size; i++){
         f32 value = 0;
@@ -45,7 +47,11 @@ void zero_thread(const int size){
         
         result += value;
     }
+    
+    const std::clock_t c_end = std::clock();
+
     std::cout << "result of Wonderful series: " << result << std::endl;
+    std::cout << "mpi_time = " << (1000.0 * (c_end - c_start) / CLOCKS_PER_SEC) << " ms" << std::endl;
 }
 
 int main(void) {
