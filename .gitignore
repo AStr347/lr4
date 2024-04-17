@@ -1,0 +1,7 @@
+.vscode/
+build/
+screens/
+*dll
+*exe
+hello
+lr4
